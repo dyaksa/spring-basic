@@ -1,5 +1,6 @@
 package belajar.sprint.boot.core;
 
+import belajar.sprint.boot.core.data.MultiFoo;
 import belajar.sprint.boot.core.repository.CategoryRepository;
 import belajar.sprint.boot.core.repository.CustomerRepository;
 import belajar.sprint.boot.core.repository.ProductRepository;
@@ -48,8 +49,18 @@ public class ComponentTest {
     @Test
     public void testFieldDependencyInjection() {
         CustomerService customerService = context.getBean(CustomerService.class);
-        CustomerRepository customerRepository = context.getBean(CustomerRepository.class);
+        CustomerRepository freeCustomerRepository = context.getBean("freeCustomerRepository",CustomerRepository.class);
+        CustomerRepository premiumCustomerRepository = context.getBean("premiumCustomerRepository",CustomerRepository.class);
 
-        Assertions.assertSame(customerRepository, customerService.getCustomerRepository());
+        Assertions.assertSame(freeCustomerRepository, customerService.getFreeCustomerRepository());
+
+        Assertions.assertSame(premiumCustomerRepository, customerService.getPremiumCustomerRepository());
+    }
+
+    @Test
+    public void testObjectProvider() {
+        MultiFoo multiFoo = context.getBean(MultiFoo.class);
+
+        Assertions.assertEquals(3, multiFoo.getFooLists().size());
     }
 }
