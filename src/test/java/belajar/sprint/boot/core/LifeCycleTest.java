@@ -1,6 +1,7 @@
 package belajar.sprint.boot.core;
 
 import belajar.sprint.boot.core.data.Connection;
+import belajar.sprint.boot.core.data.Server;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,5 +29,10 @@ public class LifeCycleTest {
        Connection connection =  context.getBean(Connection.class);
 
         Assertions.assertNotNull(connection);
+    }
+
+    @Test
+    public void testServer() {
+        Server server = context.getBean(Server.class);
     }
 }
