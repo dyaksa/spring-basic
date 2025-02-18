@@ -15,6 +15,7 @@ public class InheritanceTest {
     @BeforeEach
     void setup() {
         context = new AnnotationConfigApplicationContext(InheritanceConfiguration.class);
+        context.registerShutdownHook();
     }
 
     @Test
